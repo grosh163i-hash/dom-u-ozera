@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Участки у Озера + Дома под ключ | Ипотека 6%</title>
+    
+    <!-- SEO метатеги -->
+    <meta name="description" content="Участки 7 соток у озера с домами под ключ. Ипотека 6% для семей. Расстояние до города 30 км. Газобетонные, каркасные дома и барнхаусы. Рассчитайте стоимость онлайн.">
+    <meta name="keywords" content="участки у озера, дома под ключ, ипотека 6%, расстояние до города, 7 соток, газобетон, каркасный дом, барнхаус, Самара, береговая линия">
+    <meta name="author" content="ДомУОзера">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS файл -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-home"></i>
+                    ДомУОзера
+                </div>
+                <nav class="nav">
+                    <a href="#house-types">Типы домов</a>
+                    <a href="#calculator">Калькулятор</a>
+                    <a href="#configurator">Конфигуратор</a>
+                    <a href="#plots">Участки</a>
+                    <a href="#map">Карта</a>
+                </nav>
+                <div class="contacts-header">
+                    <a href="tel:+79277792224" class="phone-btn">
+                        <i class="fas fa-phone"></i>
+                        +7 927 779-22-24
+                    </a>
+                    <a href="https://t.me/vlast_truda_dom" target="_blank" class="telegram-btn">
+                        <i class="fab fa-telegram"></i>
+                        Telegram
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h1>УЧАСТКИ У ОЗЕРА<br><span>+ ДОМ ПОД КЛЮЧ ОТ 7 500 000 ₽</span></h1>
+            
+            <div class="hero-badges">
+                <div class="hero-badge">
+                    <i class="fas fa-route"></i>
+                    <div>
+                        <div><strong>30 км до города</strong></div>
+                        <div>Удобное расположение</div>
+                    </div>
+                </div>
+                
+                <div class="hero-badge">
+                    <i class="fas fa-ruler-combined"></i>
+                    <div>
+                        <div><strong>7 соток участки</strong></div>
+                        <div>Идеальный размер для семьи</div>
+                    </div>
+                </div>
+                
+                <div class="hero-badge">
+                    <i class="fas fa-percentage"></i>
+                    <div>
+                        <div><strong>Ипотека 6%</strong></div>
+                        <div>Для семей с детьми</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-contacts">
+                <a href="#calculator" class="cta-button">
+                    <i class="fas fa-calculator"></i> Рассчитать стоимость
+                </a>
+                <a href="#contact" class="cta-button telegram-btn">
+                    <i class="fab fa-telegram"></i> Консультация
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ТИПЫ ДОМОВ -->
+    <section id="house-types" class="section house-types-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Типы домокомплектов</h2>
+                <p>Выберите подходящий вариант для вашей семьи</p>
+            </div>
+            
+            <div class="house-types-grid">
+                <!-- Газобетонный дом -->
+                <div class="house-type-card gasbeton">
+                    <div class="house-type-header">
+                        <div class="house-type-icon">🏢</div>
+                        <h3>Газобетонный домокомплект</h3>
+                        <div class="house-type-price">от 7 500 000 ₽</div>
+                        <p>119 м² • Предчистовая отделка</p>
+                    </div>
+                    <div class="house-type-content">
+                        <h4>Материалы на выбор:</h4>
+                        <div class="material-options">
+                            <div class="material-option selected" data-material="gasbeton">Газобетон D400</div>
+                            <div class="material-option" data-material="brick">Керамический блок</div>
+                        </div>
+                        
+                        <ul class="house-type-features">
+                            <li><i class="fas fa-check"></i> Фундамент УШП</li>
+                            <li><i class="fas fa-check"></i> Стены из газобетона 300мм</li>
+                            <li><i class="fas fa-check"></i> Утепление фасада 100мм</li>
+                            <li><i class="fas fa-check"></i> Металлочерепичная кровля</li>
+                            <li><i class="fas fa-check"></i> Окна ПВХ 2-камерные</li>
+                            <li><i class="fas fa-check"></i> Стяжка пола + штукатурка стен</li>
+                        </ul>
+                        
+                        <button class="cta-button" onclick="selectHouseType('gasbeton')">
+                            Выбрать этот вариант
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Каркасный дом -->
+                <div class="house-type-card frame">
+                    <div class="house-type-header">
+                        <div class="house-type-icon">🏗️</div>
+                        <h3>Каркасный домокомплект</h3>
+                        <div class="house-type-price">от 6 800 000 ₽</div>
+                        <p>119 м² • Под ключ</p>
+                    </div>
+                    <div class="house-type-content">
+                        <h4>Материалы на выбор:</h4>
+                        <div class="material-options">
+                            <div class="material-option selected" data-material="wood">Деревянный каркас</div>
+                            <div class="material-option" data-material="lstd">ЛСТК каркас</div>
+                        </div>
+                        
+                        <ul class="house-type-features">
+                            <li><i class="fas fa-check"></i> Фундамент УШП</li>
+                            <li><i class="fas fa-check"></i> Каркас из сухой строганной доски</li>
+                            <li><i class="fas fa-check"></i> Утепление 200мм базальтовой ватой</li>
+                            <li><i class="fas fa-check"></i> Ветро-влагозащитные мембраны</li>
+                            <li><i class="fas fa-check"></i> Металлочерепичная кровля</li>
+                            <li><i class="fas fa-check"></i> Полная отделка под ключ</li>
+                        </ul>
+                        
+                        <button class="cta-button frame" onclick="selectHouseType('frame')">
+                            Выбрать этот вариант
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Барнхаус -->
+                <div class="house-type-card barn">
+                    <div class="house-type-header">
+                        <div class="house-type-icon">🪵</div>
+                        <h3>Готовый проект Барнхаус</h3>
+                        <div class="house-type-price">от 5 355 000 ₽</div>
+                        <p>119 м² • Дизайнерский проект</p>
+                    </div>
+                    <div class="house-type-content">
+                        <h4>Материалы на выбор:</h4>
+                        <div class="material-options">
+                            <div class="material-option selected" data-material="wood">Дерево + стекло</div>
+                            <div class="material-option" data-material="gasbeton">Газобетон + дерево</div>
+                        </div>
+                        
+                        <ul class="house-type-features">
+                            <li><i class="fas fa-check"></i> Фундамент УШП с панорамным остеклением</li>
+                            <li><i class="fas fa-check"></i> Деревянные стены или газобетон+дерево</li>
+                            <li><i class="fas fa-check"></i> Панорамные окна от пола до потолка</li>
+                            <li><i class="fas fa-check"></i> Двускатная кровля с большими свесами</li>
+                            <li><i class="fas fa-check"></i> Дизайнерская отделка в стиле лофт</li>
+                            <li><i class="fas fa-check"></i> Открытая планировка</li>
+                        </ul>
+                        
+                        <button class="cta-button barn" onclick="selectHouseType('barn')">
+                            Выбрать этот вариант
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- КАЛЬКУЛЯТОР -->
+    <section id="calculator" class="section calculator-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Калькулятор стоимости</h2>
+                <p>Рассчитайте точную стоимость вашего дома</p>
+            </div>
+            
+            <div class="calculator-container">
+                <div class="calc-controls">
+                    <div class="calc-group">
+                        <label><i class="fas fa-ruler-combined"></i> Площадь дома (м²)</label>
+                        <input type="range" class="calc-slider" id="areaSlider" min="50" max="200" value="119" step="1">
+                        <div class="slider-value" id="areaValue">119 м²</div>
+                    </div>
+                    
+                    <div class="calc-group">
+                        <label><i class="fas fa-home"></i> Тип дома</label>
+                        <div class="house-options">
+                            <div class="house-option selected" data-type="gasbeton" data-price="63000">
+                                <input type="radio" name="houseType" checked class="visually-hidden">
+                                <div>
+                                    <div><strong>Газобетонный</strong></div>
+                                    <div style="font-size: 0.9rem;">63 000 ₽/м²</div>
+                                </div>
+                            </div>
+                            
+                            <div class="house-option" data-type="frame" data-price="57000">
+                                <input type="radio" name="houseType" class="visually-hidden">
+                                <div>
+                                    <div><strong>Каркасный</strong></div>
+                                    <div style="font-size: 0.9rem;">57 000 ₽/м² (под ключ)</div>
+                                </div>
+                            </div>
+                            
+                            <div class="house-option" data-type="barn" data-price="45000">
+                                <input type="radio" name="houseType" class="visually-hidden">
+                                <div>
+                                    <div><strong>Барнхаус</strong></div>
+                                    <div style="font-size: 0.9rem;">45 000 ₽/м² (дизайн-проект)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="calc-group">
+                        <label><i class="fas fa-route"></i> Расстояние до города</label>
+                        <input type="range" class="calc-slider" id="distanceSlider" min="10" max="50" value="30" step="1">
+                        <div class="slider-value" id="distanceValue">30 км</div>
+                    </div>
+                    
+                    <div class="calc-group">
+                        <label><i class="fas fa-water"></i> Участок</label>
+                        <div class="house-options">
+                            <div class="house-option selected" data-plot="1400000">
+                                <input type="radio" name="plot" checked class="visually-hidden">
+                                <div>
+                                    <div><strong>1-я линия (50 м до воды)</strong></div>
+                                    <div style="font-size: 0.9rem;">1 400 000 ₽</div>
+                                </div>
+                            </div>
+                            
+                            <div class="house-option" data-plot="1100000">
+                                <input type="radio" name="plot" class="visually-hidden">
+                                <div>
+                                    <div><strong>2-я линия (150 м до воды)</strong></div>
+                                    <div style="font-size: 0.9rem;">1 100 000 ₽</div>
+                                </div>
+                            </div>
+                            
+                            <div class="house-option" data-plot="1000000">
+                                <input type="radio" name="plot" class="visually-hidden">
+                                <div>
+                                    <div><strong>Эконом класс</strong></div>
+                                    <div style="font-size: 0.9rem;">1 000 000 ₽</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="calc-group">
+                        <label><i class="fas fa-cogs"></i> Дополнительные опции</label>
+                        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" id="optionTerrace" checked>
+                                <span>Терраса 20 м² (+200 000 ₽)</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" id="optionSauna">
+                                <span>Сауна 8 м² (+250 000 ₽)</span>
+                            </label>
+                            <label style="display: flex; align-items: center; gap: 10px; cursor: pointer;">
+                                <input type="checkbox" id="optionGarage">
+                                <span>Гараж 24 м² (+350 000 ₽)</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="calc-result-box">
+                    <h3>Итого стоимость проекта</h3>
+                    
+                    <div class="result-details">
+                        <div class="result-item">
+                            <span>Участок (7 соток):</span>
+                            <span id="plotCostResult">1 400 000 ₽</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Дом (<span id="areaResult">119</span> м²):</span>
+                            <span id="houseCostResult">7 497 000 ₽</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Опции:</span>
+                            <span id="optionsCost">200 000 ₽</span>
+                        </div>
+                        <div class="result-item">
+                            <span>Доставка материалов:</span>
+                            <span id="deliveryCost">0 ₽</span>
+                        </div>
+                    </div>
+                    
+                    <div class="result-total">
+                        <span>ВСЕГО:</span>
+                        <span class="total-price" id="totalPrice">9 097 000 ₽</span>
+                    </div>
+                    
+                    <div style="margin: 2rem 0;">
+                        <h4><i class="fas fa-percentage"></i> Ипотека 6% на 20 лет:</h4>
+                        <div style="font-size: 1.8rem; font-weight: 700; margin: 1rem 0; color: var(--accent);" id="monthlyPayment">54 582 ₽/мес</div>
+                        <div style="font-size: 1rem; margin-bottom: 1.5rem;">
+                            Первый взнос 20%: <span id="initialPayment" style="font-weight: bold;">1 819 400 ₽</span>
+                        </div>
+                    </div>
+                    
+                    <button class="cta-button" id="requestCalculation" style="width: 100%; background: var(--telegram); border-color: var(--telegram);">
+                        <i class="fab fa-telegram"></i> Получить детальный расчет
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- КОНФИГУРАТОР -->
+    <section id="configurator" class="section configurator-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Конфигуратор отделки</h2>
+                <p>Настройте коммуникации и отделку вашего дома</p>
+            </div>
+            
+            <div class="configurator-container">
+                <div class="config-controls">
+                    <div class="config-group">
+                        <h3><i class="fas fa-bolt"></i> Электроснабжение</h3>
+                        <div class="config-option selected" data-price="273700" data-name="Полная разводка электрики">
+                            <div class="config-info">
+                                <div class="config-title">Полная разводка электрики</div>
+                                <div class="config-desc">Включено в базовую цену</div>
+                            </div>
+                            <div class="config-price">273 700 ₽</div>
+                        </div>
+                    </div>
+                    
+                    <div class="config-group">
+                        <h3><i class="fas fa-tint"></i> Водоснабжение и канализация</h3>
+                        <div class="config-option selected" data-price="42840" data-name="Разводка воды по дому">
+                            <div class="config-info">
+                                <div class="config-title">Разводка воды по дому</div>
+                                <div class="config-desc">Включено в базовую цену</div>
+                            </div>
+                            <div class="config-price">42 840 ₽</div>
+                        </div>
+                        
+                        <div class="config-option selected" data-price="33320" data-name="Канализационная система">
+                            <div class="config-info">
+                                <div class="config-title">Канализационная система</div>
+                                <div class="config-desc">Включено в базовую цену</div>
+                            </div>
+                            <div class="config-price">33 320 ₽</div>
+                        </div>
+                        
+                        <div class="config-option" data-price="240000" data-name="Станция биоочистки Топас-4">
+                            <div class="config-info">
+                                <div class="config-title">Станция биоочистки Топас-4</div>
+                                <div class="config-desc">Автономная канализация</div>
+                            </div>
+                            <div class="config-price">240 000 ₽</div>
+                        </div>
+                    </div>
+                    
+                    <div class="config-group">
+                        <h3><i class="fas fa-fire"></i> Отопление</h3>
+                        <div class="config-option" data-price="452200" data-name="Тёплый пол (дополнительно)">
+                            <div class="config-info">
+                                <div class="config-title">Тёплый пол (дополнительно)</div>
+                                <div class="config-desc">Дополнительные контуры отопления</div>
+                            </div>
+                            <div class="config-price">452 200 ₽</div>
+                        </div>
+                        
+                        <div class="config-option" data-price="240000" data-name="Котельная под ключ">
+                            <div class="config-info">
+                                <div class="config-title">Котельная под ключ</div>
+                                <div class="config-desc">Котёл, бойлер, расширительный бак</div>
+                            </div>
+                            <div class="config-price">240 000 ₽</div>
+                        </div>
+                    </div>
+                    
+                    <div class="config-group">
+                        <h3><i class="fas fa-paint-roller"></i> Дополнительная отделка</h3>
+                        <div class="config-option" data-price="285600" data-name="Отмостка по периметру">
+                            <div class="config-info">
+                                <div class="config-title">Отмостка по периметру</div>
+                                <div class="config-desc">Бетонная отмостка шириной 1 метр</div>
+                            </div>
+                            <div class="config-price">285 600 ₽</div>
+                        </div>
+                        
+                        <div class="config-option" data-price="166600" data-name="Софиты кровли">
+                            <div class="config-info">
+                                <div class="config-title">Софиты кровли</div>
+                                <div class="config-desc">Вентилируемые софиты из ПВХ</div>
+                            </div>
+                            <div class="config-price">166 600 ₽</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="config-summary">
+                    <div class="summary-header">
+                        <h3>Итоговая смета отделки</h3>
+                        <p>Дополнительные опции к базовой комплектации</p>
+                    </div>
+                    
+                    <div class="summary-items" id="summaryItems">
+                        <!-- Динамически заполняется -->
+                    </div>
+                    
+                    <div class="result-total">
+                        <span>ИТОГО доп. опций:</span>
+                        <span class="total-price" id="configTotalPrice">0 ₽</span>
+                    </div>
+                    
+                    <div style="margin: 2rem 0;">
+                        <div class="result-item">
+                            <span>Базовая цена дома:</span>
+                            <span>7 500 000 ₽</span>
+                        </div>
+                        <div class="result-total">
+                            <span>ОБЩАЯ СТОИМОСТЬ:</span>
+                            <span id="finalTotalPrice" style="color: var(--accent); font-size: 1.8rem;">7 500 000 ₽</span>
+                        </div>
+                    </div>
+                    
+                    <button class="cta-button" id="getConfigEstimate" style="width: 100%; margin-top: 1rem;">
+                        <i class="fas fa-download"></i> Скачать полную смету
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Участки -->
+    <section id="plots" class="section plots-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Участки у озера</h2>
+                <p>7 соток с оптимальным расположением</p>
+            </div>
+            
+            <div class="plots-grid">
+                <div class="plot-card">
+                    <h3>1-я береговая линия</h3>
+                    <div class="plot-price">1 400 000 ₽</div>
+                    <p>50 метров до воды, лучшие виды</p>
+                    <div style="margin-top: 1rem;">
+                        <p><i class="fas fa-water"></i> <strong>50 м до берега</strong></p>
+                        <p><i class="fas fa-route"></i> <strong>30 км до города</strong></p>
+                        <p><i class="fas fa-ruler-combined"></i> <strong>7 соток</strong></p>
+                    </div>
+                </div>
+                
+                <div class="plot-card">
+                    <h3>2-я береговая линия</h3>
+                    <div class="plot-price">1 100 000 ₽</div>
+                    <p>100-200 метров до воды, оптимальная цена</p>
+                    <div style="margin-top: 1rem;">
+                        <p><i class="fas fa-water"></i> <strong>100-200 м до берега</strong></p>
+                        <p><i class="fas fa-route"></i> <strong>30 км до города</strong></p>
+                        <p><i class="fas fa-ruler-combined"></i> <strong>7 соток</strong></p>
+                    </div>
+                </div>
+                
+                <div class="plot-card">
+                    <h3>Эконом класс</h3>
+                    <div class="plot-price">1 000 000 ₽</div>
+                    <p>Все коммуникации, обжитый район</p>
+                    <div style="margin-top: 1rem;">
+                        <p><i class="fas fa-bolt"></i> <strong>Все коммуникации</strong></p>
+                        <p><i class="fas fa-route"></i> <strong>30 км до города</strong></p>
+                        <p><i class="fas fa-ruler-combined"></i> <strong>7 соток</strong></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Карта -->
+    <section id="map" class="section map-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Расположение участков</h2>
+                <p>Посмотрите на карте все доступные участки</p>
+            </div>
+            
+            <div class="map-container">
+                <iframe 
+                    class="map-frame"
+                    src="https://www.google.com/maps/d/embed?mid=1Hu2N3kXNRTjnY0qI0UBvhpTKTkgreBg&ehbc=2E312F" 
+                    allowfullscreen 
+                    loading="lazy"
+                    title="Карта расположения участков у озера">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>ДомУОзера</h3>
+                    <p>Продажа участков и строительство домов под ключ</p>
+                </div>
+                
+                <div>
+                    <h3>Контакты</h3>
+                    <p><i class="fas fa-phone"></i> +7 927 779-22-24</p>
+                    <p><i class="fab fa-telegram"></i> @vlast_truda_dom</p>
+                </div>
+                
+                <div>
+                    <h3>Часы работы</h3>
+                    <p>Пн-Пт: 9:00 - 19:00</p>
+                    <p>Сб-Вс: 10:00 - 17:00</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
+                <p>© 2024 ДомУОзера. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating buttons -->
+    <div class="floating-buttons">
+        <a href="tel:+79277792224" class="floating-btn floating-phone">
+            <i class="fas fa-phone"></i>
+        </a>
+        <a href="https://t.me/vlast_truda_dom" target="_blank" class="floating-btn floating-telegram">
+            <i class="fab fa-telegram"></i>
+        </a>
+    </div>
+
+    <!-- JavaScript файл -->
+    <script src="script.js"></script>
+</body>
+</html>

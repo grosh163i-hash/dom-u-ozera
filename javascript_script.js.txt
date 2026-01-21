@@ -1,0 +1,283 @@
+// Глобальные переменные
+let currentHouseType = 'gasbeton';
+let currentHousePrice = 63000;
+let currentPlotPrice = 1400000;
+let area = 119;
+
+// Кеширование DOM элементов
+const domCache = {};
+
+// Дебаунс для оптимизации обработки событий
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
+// Инициализация при загрузке
+document.addEventListener('DOMContentLoaded', function() {
+    cacheDomElements();
+    initCalculator();
+    initConfigurator();
+    initMaterialOptions();
+    initNavigation();
+    // Первоначальный рендер конфигуратора
+    updateConfigSummary();
+});
+
+// Кеширование часто используемых DOM элементов
+function cacheDomElements() {
+    domCache.areaSlider = document.getElementById('areaSlider');
+    domCache.distanceSlider = document.getElementById('distanceSlider');
+    domCache.areaValue = document.getElementById('areaValue');
+    domCache.distanceValue = document.getElementById('distanceValue');
+    domCache.areaResult = document.getElementById('areaResult');
+    domCache.plotCostResult = document.getElementById('plotCostResult');
+    domCache.houseCostResult = document.getElementById('houseCostResult');
+    domCache.optionsCost = document.getElementById('optionsCost');
+    domCache.deliveryCost = document.getElementById('deliveryCost');
+    domCache.totalPrice = document.getElementById('totalPrice');
+    domCache.initialPayment = document.getElementById('initialPayment');
+    domCache.monthlyPayment = document.getElementById('monthlyPayment');
+    domCache.configTotalPrice = document.getElementById('configTotalPrice');
+    domCache.finalTotalPrice = document.getElementById('finalTotalPrice');
+    domCache.summaryItems = document.getElementById('summaryItems');
+}
+
+// Калькулятор
+function initCalculator() {
+    const houseOptions = document.querySelectorAll('.house-option[data-type]');
+    const plotOptions = document.querySelectorAll('.house-option[data-plot]');
+    
+    // Оптимизированные обработчики с дебаунсом
+    domCache.areaSlider.addEventListener('input', debounce(updateCalculator, 50));
+    domCache.distanceSlider.addEventListener('input', debounce(updateCalculator, 50));
+    
+    // Обработчики выбора типа дома
+    houseOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            houseOptions.forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            currentHouseType = this.dataset.type;
+            currentHousePrice = parseInt(this.dataset.price);
+            updateCalculator();
+        });
+    });
+    
+    // Обработчики выбора участка
+    plotOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            plotOptions.forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+            currentPlotPrice = parseInt(this.dataset.plot);
+            updateCalculator();
+        });
+    });
+    
+    // Обработчики чекбоксов
+    document.getElementById('optionTerrace').addEventListener('change', updateCalculator);
+    document.getElementById('optionSauna').addEventListener('change', updateCalculator);
+    document.getElementById('optionGarage').addEventListener('change', updateCalculator);
+    
+    // Кнопка расчета
+    document.getElementById('requestCalculation').addEventListener('click', requestCalculation);
+    
+    // Первоначальный расчет
+    updateCalculator();
+}
+
+function updateCalculator() {
+    // Получаем значения
+    area = parseInt(domCache.areaSlider.value);
+    const distance = parseInt(domCache.distanceSlider.value);
+    
+    // Обновляем отображение
+    domCache.areaValue.textContent = area + ' м²';
+    domCache.distanceValue.textContent = distance + ' км';
+    domCache.areaResult.textContent = area;
+    
+    // Считаем стоимость дома
+    const houseCost = area * currentHousePrice;
+    const plotCost = currentPlotPrice;
+    
+    // Дополнительные опции
+    let optionsCost = 0;
+    if (document.getElementById('optionTerrace').checked) optionsCost += 200000;
+    if (document.getElementById('optionSauna').checked) optionsCost += 250000;
+    if (document.getElementById('optionGarage').checked) optionsCost += 350000;
+    
+    // Доставка материалов (зависит от расстояния)
+    const deliveryCost = Math.max(0, (distance - 30)) * 5000;
+    
+    // Итоговая стоимость
+    const totalCost = houseCost + plotCost + optionsCost + deliveryCost;
+    
+    // Обновляем отображение
+    domCache.plotCostResult.textContent = formatPrice(plotCost) + ' ₽';
+    domCache.houseCostResult.textContent = formatPrice(houseCost) + ' ₽';
+    domCache.optionsCost.textContent = formatPrice(optionsCost) + ' ₽';
+    domCache.deliveryCost.textContent = formatPrice(deliveryCost) + ' ₽';
+    domCache.totalPrice.textContent = formatPrice(totalCost) + ' ₽';
+    
+    // Расчет ипотеки
+    const initialPercent = 20;
+    const initialPayment = totalCost * (initialPercent / 100);
+    const loanAmount = totalCost - initialPayment;
+    const monthlyRate = 0.06 / 12;
+    const months = 20 * 12;
+    
+    const monthlyPayment = loanAmount * 
+        (monthlyRate * Math.pow(1 + monthlyRate, months)) / 
+        (Math.pow(1 + monthlyRate, months) - 1);
+    
+    domCache.initialPayment.textContent = formatPrice(Math.round(initialPayment)) + ' ₽';
+    domCache.monthlyPayment.textContent = formatPrice(Math.round(monthlyPayment)) + ' ₽/мес';
+}
+
+function requestCalculation() {
+    const total = domCache.totalPrice.textContent;
+    const monthly = domCache.monthlyPayment.textContent;
+    const initial = domCache.initialPayment.textContent;
+    
+    let houseTypeName = '';
+    switch(currentHouseType) {
+        case 'gasbeton': houseTypeName = 'Газобетонный дом'; break;
+        case 'frame': houseTypeName = 'Каркасный дом'; break;
+        case 'barn': houseTypeName = 'Барнхаус'; break;
+    }
+    
+    const message = `Здравствуйте! Хочу получить детальный расчет проекта:\n\n` +
+                  `• Тип дома: ${houseTypeName}\n` +
+                  `• Площадь: ${area} м²\n` +
+                  `• Участок: ${currentPlotPrice === 1400000 ? '1-я линия' : currentPlotPrice === 1100000 ? '2-я линия' : 'Эконом класс'}\n` +
+                  `• Общая стоимость: ${total}\n` +
+                  `• Первый взнос: ${initial}\n` +
+                  `• Ежемесячный платеж: ${monthly}\n\n` +
+                  `Прошу выслать подробную смету.`;
+    
+    window.open(`https://t.me/vlast_truda_dom?text=${encodeURIComponent(message)}`, '_blank');
+}
+
+// Конфигуратор
+function initConfigurator() {
+    const configOptions = document.querySelectorAll('.config-option');
+    const getEstimateBtn = document.getElementById('getConfigEstimate');
+    
+    configOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            this.classList.toggle('selected');
+            updateConfigSummary();
+        });
+    });
+    
+    getEstimateBtn.addEventListener('click', function() {
+        const selectedOptions = document.querySelectorAll('.config-option.selected');
+        let optionsText = "Выбранные опции:\n";
+        let totalPrice = 0;
+        
+        selectedOptions.forEach(option => {
+            const name = option.dataset.name || option.querySelector('.config-title').textContent;
+            const price = parseInt(option.dataset.price);
+            optionsText += `• ${name}: ${formatPrice(price)} ₽\n`;
+            totalPrice += price;
+        });
+        
+        const message = `Здравствуйте! Прошу выслать полную смету по дополнительным опциям отделки и коммуникаций.\n\n` +
+                      `${optionsText}\n` +
+                      `Итого доп. опций: ${formatPrice(totalPrice)} ₽\n` +
+                      `Базовая цена дома: 7 500 000 ₽\n` +
+                      `Общая стоимость: ${formatPrice(7500000 + totalPrice)} ₽`;
+        
+        window.open(`https://t.me/vlast_truda_dom?text=${encodeURIComponent(message)}`, '_blank');
+    });
+}
+
+function updateConfigSummary() {
+    const selectedOptions = document.querySelectorAll('.config-option.selected');
+    let total = 0;
+    
+    // Очищаем предыдущие элементы
+    domCache.summaryItems.innerHTML = '';
+    
+    // Создаем элементы для выбранных опций
+    selectedOptions.forEach(option => {
+        const price = parseInt(option.dataset.price);
+        total += price;
+        
+        const name = option.dataset.name || option.querySelector('.config-title').textContent;
+        
+        const item = document.createElement('div');
+        item.className = 'result-item';
+        item.innerHTML = `<span>${name}:</span><span>${formatPrice(price)} ₽</span>`;
+        domCache.summaryItems.appendChild(item);
+    });
+    
+    // Обновляем итоговую стоимость
+    domCache.configTotalPrice.textContent = formatPrice(total) + ' ₽';
+    
+    // Обновить общую стоимость
+    const baseHousePrice = 7500000;
+    domCache.finalTotalPrice.textContent = formatPrice(baseHousePrice + total) + ' ₽';
+}
+
+// Выбор материалов
+function initMaterialOptions() {
+    const materialOptions = document.querySelectorAll('.material-option');
+    
+    materialOptions.forEach(option => {
+        option.addEventListener('click', function() {
+            const parent = this.closest('.house-type-card');
+            const options = parent.querySelectorAll('.material-option');
+            options.forEach(opt => opt.classList.remove('selected'));
+            this.classList.add('selected');
+        });
+    });
+}
+
+// Выбор типа дома
+function selectHouseType(type) {
+    currentHouseType = type;
+    
+    // Находим соответствующую опцию в калькуляторе
+    const houseOption = document.querySelector(`.house-option[data-type="${type}"]`);
+    if (houseOption) {
+        document.querySelectorAll('.house-option').forEach(opt => opt.classList.remove('selected'));
+        houseOption.classList.add('selected');
+        currentHousePrice = parseInt(houseOption.dataset.price);
+        updateCalculator();
+        
+        // Прокручиваем к калькулятору
+        document.getElementById('calculator').scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+// Навигация
+function initNavigation() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            if(targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if(targetElement) {
+                const headerHeight = document.querySelector('.header').offsetHeight;
+                window.scrollTo({
+                    top: targetElement.offsetTop - headerHeight - 20,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+}
+
+// Форматирование цены
+function formatPrice(price) {
+    return Math.round(price).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
